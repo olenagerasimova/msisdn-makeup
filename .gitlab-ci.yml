@@ -16,7 +16,7 @@ cache:
 build:
   stage: build
   script:
-  - mvn $MAVEN_CLI_OPTS compile -Pqulice
+  - mvn clean install -Pqulice
 
 test:
   stage: test
