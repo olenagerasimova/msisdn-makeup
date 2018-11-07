@@ -1,8 +1,6 @@
 image: maven:latest
 
 stages:
-- test
-- check
 - install
 
 variables:
@@ -14,17 +12,7 @@ cache:
   - .m2/repository/
   - target/
 
-check:
-  stage: check
-  script:
-  - mvn qulice:check -Pqulice
-
 install:
   stage: install
   script:
   - mvn clean install -Pqulice
-
-test:
-  stage: test
-  script:
-  - mvn test
