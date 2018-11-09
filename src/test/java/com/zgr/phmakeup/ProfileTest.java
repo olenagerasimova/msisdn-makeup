@@ -3,9 +3,8 @@
  */
 package com.zgr.phmakeup;
 
-import org.cactoos.list.ListOf;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.collection.IsIterableContainingInAnyOrder;
+import org.hamcrest.collection.IsCollectionWithSize;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 
@@ -21,11 +20,11 @@ public class ProfileTest {
     public void unlimitedIsCorrect() {
         MatcherAssert.assertThat(
             Profile.UNLIMITED.formats(),
-            new IsIterableContainingInAnyOrder<>(
-                new ListOf<>(
-                    new IsEqual<>(new Format(15, ""))
-                )
-            )
+            new IsCollectionWithSize<>(new IsEqual<>(1))
+        );
+        MatcherAssert.assertThat(
+            new Format.FormatEq(Profile.UNLIMITED.formats().get(0)),
+            new IsEqual<>(new FormatFor(15, ""))
         );
     }
 
@@ -33,11 +32,11 @@ public class ProfileTest {
     public void ruProfileIsCorrect() {
         MatcherAssert.assertThat(
             Profile.RU.formats(),
-            new IsIterableContainingInAnyOrder<>(
-                new ListOf<>(
-                    new IsEqual<>(new Format(11, "7"))
-                )
-            )
+            new IsCollectionWithSize<>(new IsEqual<>(1))
+        );
+        MatcherAssert.assertThat(
+            new Format.FormatEq(Profile.RU.formats().get(0)),
+            new IsEqual<>(new FormatFor(11, "7"))
         );
     }
 }

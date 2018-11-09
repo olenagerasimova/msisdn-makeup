@@ -4,6 +4,7 @@
 package com.zgr.phmakeup;
 
 import org.cactoos.list.ListOf;
+import org.cactoos.list.Mapped;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.collection.IsIterableContainingInAnyOrder;
@@ -19,28 +20,35 @@ import org.junit.Test;
 public class ProfileForTest {
 
     @Test
+    public void parsesSingleDescriptorCorrectly() {
+        MatcherAssert.assertThat(
+            new Format.FormatEq(new ProfileFor("13,77").formats().get(0)),
+            new IsEqual<>(new FormatFor(13, "77"))
+        );
+    }
+
+    @Test
     public void parsesShortDescriptorCorrectly() {
         MatcherAssert.assertThat(
-            new ProfileFor("13,77").formats(),
-            new IsIterableContainingInAnyOrder<>(
-                new ListOf<Matcher<? super Object>>(
-                    new IsEqual<>(new Format(13, "77"))
-                )
-            )
+            new Format.FormatEq(new ProfileFor("15").formats().get(0)),
+            new IsEqual<>(new FormatFor(15, ""))
         );
     }
 
     @Test
     public void parsesLongDescriptorCorrectly() {
         MatcherAssert.assertThat(
-            new ProfileFor("13,71;11,7;15,789;12;9,0").formats(),
+            new Mapped<>(
+                Format.FormatEq::new,
+                new ProfileFor("13,71;11,7;15,789;12;9,0").formats()
+            ),
             new IsIterableContainingInAnyOrder<>(
                 new ListOf<Matcher<? super Object>>(
-                    new IsEqual<>(new Format(13, "71")),
-                    new IsEqual<>(new Format(11, "7")),
-                    new IsEqual<>(new Format(15, "789")),
-                    new IsEqual<>(new Format(12, "")),
-                    new IsEqual<>(new Format(9, "0"))
+                    new IsEqual<>(new FormatFor(13, "71")),
+                    new IsEqual<>(new FormatFor(11, "7")),
+                    new IsEqual<>(new FormatFor(15, "789")),
+                    new IsEqual<>(new FormatFor(12, "")),
+                    new IsEqual<>(new FormatFor(9, "0"))
                 )
             )
         );

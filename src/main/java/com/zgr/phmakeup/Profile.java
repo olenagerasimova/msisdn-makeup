@@ -3,6 +3,7 @@
  */
 package com.zgr.phmakeup;
 
+import java.util.List;
 import org.cactoos.list.ListOf;
 
 /**
@@ -14,10 +15,9 @@ public interface Profile {
     /**
      * Russian msisdn profile.
      * @since 1.0
-     * @checkstyle MagicNumberCheck (5 lines)
      */
     Profile RU = () -> new ListOf<>(
-        new Format(11, "7")
+        new Format.Russian()
     );
 
     /**
@@ -27,12 +27,12 @@ public interface Profile {
      * @checkstyle MagicNumberCheck (5 lines)
      */
     Profile UNLIMITED = () -> new ListOf<>(
-        new Format(15, "")
+        new FormatFor(15, "")
     );
 
     /**
      * Returns allowed formats for profile.
-     * @return Iterable of {@link Format}
+     * @return Iterable of {@link FormatFor}
      */
-    Iterable<Format> formats();
+    List<Format> formats();
 }
