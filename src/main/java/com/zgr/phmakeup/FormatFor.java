@@ -41,4 +41,30 @@ final class FormatFor implements Format {
     public int len() {
         return this.lngth;
     }
+
+    @Override
+    public boolean suits(final String number) {
+        return number.length() == this.lngth
+            && number.startsWith(this.prfx)
+            || number.length() == this.lngth - this.prfx.length();
+    }
+
+    @Override
+    public String format(final String number) {
+        if (this.suits(number)) {
+            final String res;
+            if (number.length() == this.lngth - this.prfx.length()) {
+                res = this.prfx + number;
+            } else {
+                res = number;
+            }
+            return res;
+        }
+        throw new IllegalArgumentException(
+            String.format(
+                "Phone number %s does not suit format len = %d, prefix = %s",
+                number, this.lngth, this.prfx
+            )
+        );
+    }
 }
