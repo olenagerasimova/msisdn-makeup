@@ -3,6 +3,7 @@
  */
 package com.zgr.phmakeup;
 
+import java.util.List;
 import javax.validation.constraints.NotNull;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.list.Mapped;
@@ -30,7 +31,7 @@ public final class ProfileFor implements Profile {
     }
 
     @Override
-    public Iterable<Format> formats() {
+    public List<Format> formats() {
         return new Mapped<>(
             ProfileFor::parse,
             new IterableOf<>(this.description.split(";"))
@@ -38,18 +39,18 @@ public final class ProfileFor implements Profile {
     }
 
     /**
-     * Parses string into {@link Format}.
+     * Parses string into {@link FormatFor}.
      * @param frm String format representation to parse
-     * @return Returns {@link Format} for given string
+     * @return Returns {@link FormatFor} for given string
      * @throws NumberFormatException if string representation is invalid
      */
-    private static Format parse(@NotNull final String frm) {
-        final Format res;
+    private static FormatFor parse(@NotNull final String frm) {
+        final FormatFor res;
         final int comma = frm.indexOf(',');
         if (comma < 0) {
-            res = new Format(Integer.parseInt(frm), "");
+            res = new FormatFor(Integer.parseInt(frm), "");
         } else {
-            res = new Format(
+            res = new FormatFor(
                 Integer.parseInt(frm.substring(0, comma)),
                 frm.substring(comma + 1)
             );
