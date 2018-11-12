@@ -127,15 +127,6 @@
                     <rule>
                       <element>BUNDLE</element>
                       <limits>
-                        <!--
-                        @todo #204:30min Increasing code coverage by
-                         writing unit tests. Coverage ration minimum:
-                         instruction 0.61
-                         lines       0.65
-                         branches    0.65
-                         complexity  0.57
-                         classes missed count maximum: 15
-                         -->
                         <limit>
                           <counter>INSTRUCTION</counter>
                           <value>COVEREDRATIO</value>
@@ -195,32 +186,5 @@
         </plugins>
       </build>
     </profile>
-    <!--
-    <profile>
-      <id>itcase</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-failsafe-plugin</artifactId>
-            <version>2.20.1</version>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>integration-test</goal>
-                  <goal>verify</goal>
-                </goals>
-              </execution>
-            </executions>
-            <configuration>
-              <encoding>${project.build.sourceEncoding}</encoding>
-              <failIfNoSpecifiedTests>false</failIfNoSpecifiedTests>
-              <trimStackTrace>false</trimStackTrace>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    -->
   </profiles>
 </project>

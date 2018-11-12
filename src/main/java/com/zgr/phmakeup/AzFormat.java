@@ -6,7 +6,7 @@ package com.zgr.phmakeup;
 import javax.validation.constraints.NotNull;
 
 /**
- * Russian phone numbers format descriptor.
+ * Azerbaijan phone numbers format descriptor.
  * @since 1.0
  */
 final class AzFormat implements Format {
