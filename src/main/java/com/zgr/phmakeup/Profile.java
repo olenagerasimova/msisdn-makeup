@@ -16,9 +16,7 @@ public interface Profile {
      * Russian msisdn profile.
      * @since 1.0
      */
-    Profile RU = () -> new ListOf<>(
-        new Format.Russian()
-    );
+    Profile RU = () -> new ListOf<>(new RuFormat());
 
     /**
      * Profile, limited only by maximum msisdn length. Corresponds to mobicont
@@ -26,9 +24,7 @@ public interface Profile {
      * @since 1.0
      * @checkstyle MagicNumberCheck (5 lines)
      */
-    Profile UNLIMITED = () -> new ListOf<>(
-        new FormatFor(15, "")
-    );
+    Profile UNLIMITED = () -> new ListOf<>(Format.NO_CHECK);
 
     /**
      * Returns allowed formats for profile.

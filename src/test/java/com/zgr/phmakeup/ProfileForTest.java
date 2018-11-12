@@ -22,7 +22,7 @@ public class ProfileForTest {
     @Test
     public void parsesSingleDescriptorCorrectly() {
         MatcherAssert.assertThat(
-            new Format.FormatEq(new ProfileFor("13,77").formats().get(0)),
+            new FormatEq(new ProfileFor("13,77").formats().get(0)),
             new IsEqual<>(new FormatFor(13, "77"))
         );
     }
@@ -30,7 +30,7 @@ public class ProfileForTest {
     @Test
     public void parsesShortDescriptorCorrectly() {
         MatcherAssert.assertThat(
-            new Format.FormatEq(new ProfileFor("15").formats().get(0)),
+            new FormatEq(new ProfileFor("15").formats().get(0)),
             new IsEqual<>(new FormatFor(15, ""))
         );
     }
@@ -39,7 +39,7 @@ public class ProfileForTest {
     public void parsesLongDescriptorCorrectly() {
         MatcherAssert.assertThat(
             new Mapped<>(
-                Format.FormatEq::new,
+                FormatEq::new,
                 new ProfileFor("13,71;11,7;15,789;12;9,0").formats()
             ),
             new IsIterableContainingInAnyOrder<>(

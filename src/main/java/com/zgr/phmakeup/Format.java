@@ -3,7 +3,6 @@
  */
 package com.zgr.phmakeup;
 
-import java.util.Objects;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -11,6 +10,41 @@ import javax.validation.constraints.NotNull;
  * @since 1.0
  */
 public interface Format {
+
+    /**
+     * Format, that checks only maximum length.
+     * @checkstyle AnonInnerLengthCheck (30 lines)
+     */
+    Format NO_CHECK = new Format() {
+        @Override
+        public @NotNull String prefix() {
+            return "";
+        }
+
+        @Override
+        public int len() {
+            //@checkstyle MagicNumberCheck (1 line)
+            return 15;
+        }
+
+        @Override
+        public boolean suits(@NotNull final String number) {
+            return number.length() <= this.len();
+        }
+
+        @Override
+        public @NotNull String format(@NotNull final String number) {
+            if (!this.suits(number)) {
+                throw new IllegalArgumentException(
+                    String.format(
+                        "Msisdn %s is longer than allowed (max allowed is %d)",
+                        number, this.len()
+                    )
+                );
+            }
+            return number;
+        }
+    };
 
     /**
      * Format prefix (country code).
@@ -25,60 +59,18 @@ public interface Format {
     int len();
 
     /**
-     * Russian phone numbers format descriptor.
+     * Checks whether given phone suits to the format.
+     * @param number Clean phone
+     * @return True if number suits this format
      */
-    class Russian implements Format {
-
-        @Override
-        public @NotNull String prefix() {
-            return "7";
-        }
-
-        @Override
-        public int len() {
-            //@checkstyle MagicNumberCheck (1 line)
-            return 11;
-        }
-    }
+    boolean suits(@NotNull String number);
 
     /**
-     * Implementation of {@link Format} with equals. Useful in tests.
+     * Formats given number according to formats prefix and length.
+     * @param number Clean phone
+     * @return Formatted msisdn
+     * @throws IllegalArgumentException If given number cannot be formatted
      */
-    class FormatEq implements Format {
+    @NotNull String format(@NotNull String number);
 
-        /**
-         * Origin format.
-         */
-        private final Format origin;
-
-        /**
-         * Ctor.
-         * @param origin Format
-         */
-        public FormatEq(final Format origin) {
-            this.origin = origin;
-        }
-
-        @Override
-        public @NotNull String prefix() {
-            return this.origin.prefix();
-        }
-
-        @Override
-        public int len() {
-            return this.origin.len();
-        }
-
-        @Override
-        public boolean equals(final Object that) {
-            return that instanceof Format
-                && (this == that || this.len() == ((Format) that).len()
-                && Objects.equals(this.prefix(), ((Format) that).prefix()));
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(this.len(), this.prefix());
-        }
-    }
 }

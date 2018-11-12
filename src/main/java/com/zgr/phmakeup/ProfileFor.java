@@ -39,16 +39,20 @@ public final class ProfileFor implements Profile {
     }
 
     /**
-     * Parses string into {@link FormatFor}.
+     * Parses string into {@link Format}.
      * @param frm String format representation to parse
-     * @return Returns {@link FormatFor} for given string
+     * @return Returns {@link Format} for given string
      * @throws NumberFormatException if string representation is invalid
      */
-    private static FormatFor parse(@NotNull final String frm) {
-        final FormatFor res;
+    private static Format parse(@NotNull final String frm) {
+        final Format res;
         final int comma = frm.indexOf(',');
         if (comma < 0) {
             res = new FormatFor(Integer.parseInt(frm), "");
+        } else if ("11,7".equals(frm)) {
+            res = new RuFormat();
+        } else if ("12,994".equals(frm)) {
+            res = new AzFormat();
         } else {
             res = new FormatFor(
                 Integer.parseInt(frm.substring(0, comma)),

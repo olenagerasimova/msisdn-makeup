@@ -23,7 +23,7 @@ public class ProfileTest {
             new IsCollectionWithSize<>(new IsEqual<>(1))
         );
         MatcherAssert.assertThat(
-            new Format.FormatEq(Profile.UNLIMITED.formats().get(0)),
+            new FormatEq(Profile.UNLIMITED.formats().get(0)),
             new IsEqual<>(new FormatFor(15, ""))
         );
     }
@@ -35,7 +35,7 @@ public class ProfileTest {
             new IsCollectionWithSize<>(new IsEqual<>(1))
         );
         MatcherAssert.assertThat(
-            new Format.FormatEq(Profile.RU.formats().get(0)),
+            new FormatEq(Profile.RU.formats().get(0)),
             new IsEqual<>(new FormatFor(11, "7"))
         );
     }
