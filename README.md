@@ -16,7 +16,7 @@ There is special profile `Profile.UNLIMITED` in the library, that allows msisdns
 
 ## How to use
  To makeup phone, create `PhoneFor` instance and call `makeup` method: 
- ```java
+ ```
 String cleanPhone = new PhoneFor("(909) 695-952-12", new ProfileFor("13,71;13;10,8")).makeup();
 ```
 `cleanPhone` will be equal to `7190969595212`, as given phone is suitable for `13,71`. If given phone does not suit any of the given profile, `IlligalArgumentException` is thrown.
@@ -24,12 +24,12 @@ String cleanPhone = new PhoneFor("(909) 695-952-12", new ProfileFor("13,71;13;10
 Please, note, 
 * that msisdn will be formatted according first suitable format in given profile. 
 * Russian profile is `7,11`, but phone numbers that starts with 8 are also suitable for it. In the example below result will be `89096959512` in both cases
-```java
+```
 String ruPhone2 = new PhoneFor("8 (909) 695-95-12", Profile.RU).makeup();
 String ruPhone1 = new PhoneFor("8 (909) 695-95-12", new ProfileFor("11,7;10,5")).makeup();
 ```
 * Azerbaijan profile is `12,994`, but phones with `zero` prefix are also formatted as Az:
-```java
+```
 String azPhone = new PhoneFor("0 854 741 256", new ProfileFor("12,994")).makeup(); // Result is 994854741256
 ```
 
@@ -52,7 +52,7 @@ as described in "Test Method Names" section in this post: https://www.yegor256.c
 
 For assertions "Hamcrest" library is used, so it's good practice to design each test method
 as single assertion with matching expected result.
-```java
+```
 @Test
 public void returnZero() {
   MatcherAssert.assertThat(
@@ -63,6 +63,6 @@ public void returnZero() {
 ```
 
 If all test methods are named properly javadocs for them can be skipped with:
-```java
+```
 @checkstyle JavadocMethodCheck (500 lines)
 ```   
