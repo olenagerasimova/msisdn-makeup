@@ -2,15 +2,23 @@ image: maven:latest
 
 stages:
 - install
+- deploy
 
 cache:
   paths:
   - .m2/repository/
   - target/
 
-install:
+install_job:
   stage: install
   only:
-    - branches
+  - branches
   script:
-  - mvn clean install -Pqulice
+  - mvn -e clean install -Pqulice
+
+deploy_job:
+  stage: deploy
+  only:
+  - tags
+  script:
+  - mvn clean deploy -Dmaven.test.skip=true
