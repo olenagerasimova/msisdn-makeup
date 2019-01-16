@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>V2</groupId>
   <artifactId>phmakeup</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
   <description>V2 library for msisdn formatting</description>
   <inceptionYear>2018</inceptionYear>
   <distributionManagement>
