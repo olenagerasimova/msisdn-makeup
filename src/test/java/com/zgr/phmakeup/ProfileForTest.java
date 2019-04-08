@@ -3,7 +3,6 @@
  */
 package com.zgr.phmakeup;
 
-import java.util.List;
 import org.cactoos.list.ListOf;
 import org.cactoos.list.Mapped;
 import org.hamcrest.Matcher;
