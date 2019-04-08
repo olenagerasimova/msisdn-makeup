@@ -53,4 +53,19 @@ public class ProfileForTest {
             )
         );
     }
+
+    @Test
+    public void parsesEmptyLine() {
+        MatcherAssert.assertThat(
+            new Mapped<>(
+                FormatEq::new,
+                new ProfileFor("").formats()
+            ),
+            new IsIterableContainingInAnyOrder<>(
+                new ListOf<Matcher<? super Object>>(
+                    new IsEqual<>(Format.NO_CHECK)
+                )
+            )
+        );
+    }
 }

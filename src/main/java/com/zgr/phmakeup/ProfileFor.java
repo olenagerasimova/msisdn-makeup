@@ -21,21 +21,21 @@ public final class ProfileFor implements Profile {
     /**
      * Profile description.
      */
-    private final String description;
+    private final List<Format> frmts;
 
     /** Ctor.
      * @param description Profile description
      */
     public ProfileFor(@NotNull final String description) {
-        this.description = description;
+        this.frmts = new Mapped<>(
+            ProfileFor::parse,
+            new IterableOf<>(description.split(";"))
+        );
     }
 
     @Override
     public List<Format> formats() {
-        return new Mapped<>(
-            ProfileFor::parse,
-            new IterableOf<>(this.description.split(";"))
-        );
+        return this.frmts;
     }
 
     /**
@@ -47,7 +47,9 @@ public final class ProfileFor implements Profile {
     private static Format parse(@NotNull final String frm) {
         final Format res;
         final int comma = frm.indexOf(',');
-        if (comma < 0) {
+        if (frm.isEmpty()) {
+            res = Format.NO_CHECK;
+        } else if (comma < 0) {
             res = new FormatFor(Integer.parseInt(frm), "");
         } else if ("11,7".equals(frm)) {
             res = new RuFormat();
