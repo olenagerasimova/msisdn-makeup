@@ -3,6 +3,7 @@
  */
 package com.zgr.phmakeup;
 
+import java.util.List;
 import org.cactoos.list.ListOf;
 import org.cactoos.list.Mapped;
 import org.hamcrest.Matcher;
@@ -49,6 +50,21 @@ public class ProfileForTest {
                     new IsEqual<>(new FormatFor(15, "789")),
                     new IsEqual<>(new FormatFor(12, "")),
                     new IsEqual<>(new FormatFor(9, "0"))
+                )
+            )
+        );
+    }
+
+    @Test
+    public void parsesEmptyLine() {
+        MatcherAssert.assertThat(
+            new Mapped<>(
+                FormatEq::new,
+                new ProfileFor("").formats()
+            ),
+            new IsIterableContainingInAnyOrder<>(
+                new ListOf<Matcher<? super Object>>(
+                    new IsEqual<>(Format.NO_CHECK)
                 )
             )
         );
