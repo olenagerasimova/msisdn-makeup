@@ -23,7 +23,7 @@ String cleanPhone = new PhoneFor("(909) 695-952-12", new ProfileFor("13,71;13;10
 
 Please, note, 
 * that msisdn will be formatted according first suitable format in given profile. 
-* Russian profile is `7,11`, but phone numbers that starts with 8 are also suitable for it. In the example below result will be `89096959512` in both cases
+* Russian profile is `11,7`, but phone numbers that starts with 8 are also suitable for it. In the example below result will be `89096959512` in both cases
 
 ```java
 String ruPhone2 = new PhoneFor("8 (909) 695-95-12", Profile.RU).makeup();
