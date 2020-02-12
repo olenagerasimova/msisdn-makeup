@@ -1,6 +1,3 @@
-/*
- * Copyright (c) 2018 Zagruzka
- */
 package com.zgr.phmakeup;
 
 import javax.validation.constraints.NotNull;
