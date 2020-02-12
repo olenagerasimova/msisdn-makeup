@@ -8,22 +8,6 @@
   <version>1.0.1</version>
   <description>V2 library for msisdn formatting</description>
   <inceptionYear>2018</inceptionYear>
-  <distributionManagement>
-    <repository>
-      <id>zagruzka-nexus</id>
-      <name>Releases</name>
-      <url>http://10.241.0.188:8081/repository/maven-releases</url>
-    </repository>
-    <snapshotRepository>
-      <id>zagruzka-nexus</id>
-      <name>Snapshot</name>
-      <url>http://10.241.0.188:8081/repository/maven-snapshots</url>
-    </snapshotRepository>
-  </distributionManagement>
-  <organization>
-    <name>Zagruzka</name>
-    <url>https://www.zagruzka.com/</url>
-  </organization>
   <build>
     <resources>
       <resource>
